@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Tableau Dinamis</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
+    body { display: flex; height: 100vh; }
+    .sidebar {
+      width: 220px;
+      background-color: #f0f0f0;
+      padding: 20px;
+      border-right: 1px solid #ccc;
+    }
+    .sidebar h2 { margin-bottom: 20px; font-size: 18px; }
+    .sidebar a {
+      display: block;
+      margin-bottom: 10px;
+      color: #333;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .sidebar a:hover { color: #007bff; }
+    .main-content {
+      flex: 1;
+      padding: 20px;
+    }
+    #vizContainer {
+      width: 100%;
+      height: 600px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sidebar">
+    <h2>NiceAdmin</h2>
+    <a onclick="loadViz('BarChart')">Bar Chart</a>
+    <a onclick="loadViz('LineChart')">Line Chart</a>
+    <a onclick="loadViz('PieChart')">Pie Chart</a>
+    <a onclick="loadViz('MapChart')">Map Chart</a>
+    <a onclick="loadViz('ScatterPlot')">Scatter Plot</a>
+    <a onclick="loadViz('BubbleChart')">Bubble Chart</a>
+    <a onclick="loadViz('TreeMap')">Tree Map</a>
+    <a onclick="loadViz('GanttChart')">Gantt Chart</a>
+    <a onclick="loadViz('LollipopChart')">Lollipop Chart</a>
+    <a onclick="loadViz('WordCloud')">Word Cloud</a>
+    <a onclick="loadViz('BoxPlot')">Box Plot</a>
+    <a onclick="loadViz('Histogram')">Histogram Chart</a>
+    <a onclick="loadViz('SampleSuperstore')">Sample Superstore</a>
+    <!-- Tambahkan lainnya sesuai kebutuhan -->
+  </div>
+
+  <div class="main-content">
+    <h1 id="chartTitle">Pilih Chart</h1>
+    <div id="vizContainer"></div>
+  </div>
+
+  <script src="https://public.tableau.com/javascripts/api/tableau-2.min.js"></script>
+  <script>
+    let viz;
+
+      const chartLinks = {
+  BarChart: 'https://public.tableau.com/views/M_Syamsul_Rizal_Amri2431011_Project10/Dashboard1',
+  LineChart: 'https://public.tableau.com/views/M_Syamsul_Rizal_Amri2431011Project_10_Line_Chart/Dashboard1',
+  PieChart: 'https://public.tableau.com/views/M_Syamsul_Rizal_Amri2431011_Project10_Pie_Chart/Dashboard1',
+  MapChart: 'https://public.tableau.com/views/M_Syamsul_Rizal_Amri2431011Project_10_Map_Chart/Dashboard1',
+  ScatterPlot: 'https://public.tableau.com/views/M_Syamsul_Rizal_Amri2431011Project10_Scatter_Plot/Dashboard1',
+  BubbleChart: 'https://public.tableau.com/views/M_Syamsul_Rizal_Amri2431011Project10_Bubble_Chart/Dashboard1',
+  TreeMap: 'https://public.tableau.com/views/M_Syamsul_Rizal_Amri2431011Project10_Tree_Map/Dashboard1',
+  GanttChart: 'https://public.tableau.com/views/M_Syamsul_Rizal_Amri2431011Project10_Gantt_Chart/Dashboard1',
+  LollipopChart: 'https://public.tableau.com/views/M_Syamsul_Rizal_Amri2431011Project10_Lolipop_Chart/Dashboard1',
+  WordCloud: 'https://public.tableau.com/views/M_Syamsul_Rizal_Amri2431011Project10_Word_Cloud/Dashboard1',
+  BoxPlot: 'https://public.tableau.com/views/M_Syamsul_Rizal_Amri2431011Project10_Box_Pilot/Dashboard1',
+  Histogram: 'https://public.tableau.com/views/M_Syamsul_Rizal_Amri2431011Project10_Histogram_Chart/Dashboard1'
+};
+
+    function loadViz(chartName) {
+      const container = document.getElementById("vizContainer");
+      const url = chartLinks[chartName];
+      const title = document.getElementById("chartTitle");
+
+      // Set judul chart
+      title.innerText = chartName.replace(/([A-Z])/g, ' $1').trim();
+
+      // Hapus visualisasi sebelumnya jika ada
+      if (viz) {
+        viz.dispose();
+      }
+
+      // Tampilkan chart baru
+      const options = {
+        width: "100%",
+        height: "600px",
+        hideToolbar: false,
+        hideTabs: true
+      };
+      viz = new tableau.Viz(container, url, options);
+    }
+  </script>
+
+</body>
+</html>
